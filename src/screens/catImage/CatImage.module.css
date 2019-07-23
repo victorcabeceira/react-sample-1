@@ -1,0 +1,18 @@
+.TitleText {
+  font-size: 200%;
+  text-align: center;
+}
+
+.ErrorText {
+  font-size: 200%;
+  text-align: center;
+  color: red;
+  font-weight: 800;
+}
+
+.ImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 5px 10px;
+}
