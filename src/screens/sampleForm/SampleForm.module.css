@@ -1,0 +1,15 @@
+.Container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50
+}
+
+.TextField {
+  margin-left: 5;
+  margin-right: 5;
+  width: 200;
+}
+
+.Menu {
+  width: 200;
+}

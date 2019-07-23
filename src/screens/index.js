@@ -9,10 +9,15 @@ const Cats = lazy(() => {
   return import('./catImage');
 });
 
+const Form = lazy(() => {
+  return import ('./sampleForm');
+});
+
 const app = props => {
   const routes = (
     <div>
       <Route exact path='/cats' component={Cats} />
+      <Route exact path='/form' component={Form} />
       <Route exact path='/' component={Main} />
       <Redirect to='/' />
     </div>

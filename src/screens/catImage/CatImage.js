@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { RandomCatImage } from '../../core/services';
 
@@ -15,16 +16,13 @@ export default props => {
   const loadCatImage = async () => {
     const image = await new RandomCatImage().getCatImage();
 
-    console.log('image', image);
-    if (image.success) {
-      setImage(image.data[0].url);
-    } else {
-      setError(image.error.message)
-    }
+    if (image.success) setImage(image.data[0].url)
+    else setError(image.error.message)
   }
 
   return (
     <div>
+      <Link to='/' className={classes.TitleText}>Back to home</Link>
       <p className={classes.TitleText}>A cat</p>
       {error.length ?
         <p className={classes.ErrorText}>Error: {error}</p> :

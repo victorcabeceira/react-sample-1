@@ -20,6 +20,7 @@ const app = props => {
         Learn React
             </a>
       <Link to='/cats'>Cats</Link>
+      <Link to='/form'>Form</Link>
 
     </header>
   )
