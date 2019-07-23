@@ -1,22 +1,14 @@
 import React from 'react';
 import { TextField, MenuItem } from '@material-ui/core';
 import { Grid, Row } from 'react-flexbox-grid';
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions';
 
 import classes from './SampleForm.module.css';
 
-export default props => {
-  const [values, setValues] = React.useState({
-    name: 'Victor',
-    age: '',
-    multiline: 'Controlled',
-    select: 'EUR',
-    password: '',
-  });
-
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-  };
-
+const form = props => {
+  console.log('props', props);
   const currencies = [
     {
       value: 'USD',
@@ -36,6 +28,11 @@ export default props => {
     },
   ];
 
+  const handleChange = name => event => {
+    console.log('handleChange', name, event)
+    props.onEditForm(name, event.target.value);
+  };
+
   return (
     <Grid fluid>
       <div className='mt-md'>
@@ -44,7 +41,7 @@ export default props => {
             id='name'
             label='Nome'
             className={classes.TextField}
-            value={values.name}
+            value={props.form.name}
             onChange={handleChange('name')}
             margin='normal'
           />
@@ -57,7 +54,7 @@ export default props => {
             id='age'
             label='Idade'
             className={classes.TextField}
-            value={values.age}
+            value={props.form.age}
             type='number'
             onChange={handleChange('age')}
           />
@@ -70,7 +67,7 @@ export default props => {
             id='multiline'
             label='Várias linhas'
             className={classes.TextField}
-            value={values.multiline}
+            value={props.form.multiline}
             multiline
             rows='4'
             onChange={handleChange('multiline')}
@@ -85,7 +82,7 @@ export default props => {
             label='Senha'
             type='password'
             className={classes.TextField}
-            value={values.password}
+            value={props.form.password}
             onChange={handleChange('password')}
           />
         </Row>
@@ -97,7 +94,7 @@ export default props => {
             id='select'
             label='Selecione um valor'
             className={classes.TextField}
-            value={values.currency}
+            value={props.form.currency}
             select
             onChange={handleChange('currency')}
             helperText='Selecione a moeda'
@@ -117,5 +114,19 @@ export default props => {
         </Row>
       </div>
     </Grid>
-  )
+  );
 }
+
+const mapStateToProps = state => {
+  return {
+    form: state.form.form
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onEditForm: (fieldName, value) => dispatch(actions.editForm(fieldName, value))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(form);
